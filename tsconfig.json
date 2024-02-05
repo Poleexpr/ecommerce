@@ -21,7 +21,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/utils/helpers/*": ["./src/utils/helpers/*"],
-      "@/utils/constants/*": ["./src/utils/constants/*"]
+      "@/utils/constants/*": ["./src/utils/constants/*"],
+      "@/components/skeleton/*": ["./src/components/skeleton/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
