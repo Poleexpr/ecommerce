@@ -1,6 +1,7 @@
-import { Link } from 'lucide-react';
+import Link from 'next/link';
+
+import { Logo } from '@/components/icons';
 import { MaxWidthWrapper } from '@/components/skeleton';
-import { Icons } from '../icons/icon';
 
 import { NavItems } from './NavItems';
 
@@ -13,10 +14,9 @@ export const Navbar = () => (
             {/* TODO: make mobile menu */}
             <div className='ml-4 flex lg:ml-0'>
               <Link href='/'>
-                <Icons.logo className='h-10 w-10' />
+                <Logo className='h-10 w-10' />
               </Link>
             </div>
-
             <div className='hidden z-50 lg:ml-8 lg:block lg:self-stretch'>
               <NavItems />
             </div>
