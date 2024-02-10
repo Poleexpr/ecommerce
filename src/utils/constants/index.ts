@@ -1,1 +1,1 @@
-export const test = 100;
+export * from './productCategories';
