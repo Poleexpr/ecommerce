@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { Cart } from '@/components/cart';
 import { Logo } from '@/components/icons';
 import { MaxWidthWrapper } from '@/components/skeleton';
 import { buttonVariants } from '@/components/ui';
@@ -59,7 +60,9 @@ export const Navbar = () => (
                   </div>
                 )}
 
-                <div className='ml-4 flow-root lg:ml-6'>cart</div>
+                <div className='ml-4 flow-root lg:ml-6'>
+                  <Cart />
+                </div>
               </div>
             </div>
           </div>
