@@ -24,6 +24,7 @@ export default buildConfig({
     max: 2000,
   },
   editor: slateEditor({}),
+  // TODO change db to postresql
   db: mongooseAdapter({
     url: process.env.MONGODB_URL!,
   }),
