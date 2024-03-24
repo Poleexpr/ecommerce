@@ -1,16 +1,33 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import classnames from 'classnames';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { useForm } from 'react-hook-form';
 
 import { Logo } from '@/components';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import type { TAuthCredentialsValidator } from '@/lib/validators/account-credentials-validator';
+import { AuthCredentialsValidator } from '@/lib/validators/account-credentials-validator';
+import { trpc } from '@/trpc/client';
 
 const Page = () => {
-  const x = 0;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TAuthCredentialsValidator>({
+    resolver: zodResolver(AuthCredentialsValidator),
+  });
+
+  const { mutate, isLoading } = trpc.auth.createPayloadUser.useMutation({});
+
+  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
+    mutate({ email, password });
+  };
 
   return (
     <div className='container relative flex flex-col items-center justify-center pt-20 lg:px-0'>
@@ -32,23 +49,26 @@ const Page = () => {
         </div>
 
         <div className='grid gap-6'>
-          <form onSubmit={}>
+          <form onSubmit={handleSubmit(onSubmit())}>
             <div className='grid gap-2'>
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='email'>Email</Label>
                 <Input
+                  {...register('email')}
                   placeholder='you@example.com'
                   className={classnames({
-                    'focus-visible:ring-red-500': true,
+                    'focus-visible:ring-red-500': errors.email,
                   })}
                 />
               </div>
               <div className='grid gap-1 py-2'>
                 <Label htmlFor='password'>Password</Label>
                 <Input
+                  {...register('password')}
                   placeholder='Password'
+                  type='password'
                   className={classnames({
-                    'focus-visible:ring-red-500': true,
+                    'focus-visible:ring-red-500': errors.password,
                   })}
                 />
               </div>
